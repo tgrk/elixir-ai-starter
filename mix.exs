@@ -41,6 +41,7 @@ defmodule ElixirAiStarter.MixProject do
       {:credo_unnecessary_reduce, "~> 0.4.0", only: [:dev, :test], runtime: false},
       {:forge_credo_checks, "~> 0.4", only: [:dev, :test], runtime: false},
       {:ex_dna, "~> 1.5", only: [:dev, :test], runtime: false},
+      {:rename_project, "~> 0.1.0", only: :dev, runtime: false},
       {:tidewave, "~> 0.1", only: :dev},
       {:bandit, "~> 1.0", only: :dev}
     ]
@@ -49,6 +50,7 @@ defmodule ElixirAiStarter.MixProject do
   defp aliases do
     [
       setup: ["deps.get"],
+      "rename.project": "cmd bash scripts/rename-project.sh",
       quality: ["format", "quality.check"],
       "quality.check": [
         "format --check-formatted",

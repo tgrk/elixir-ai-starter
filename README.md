@@ -36,6 +36,7 @@ The first verification builds Dialyzer's PLT and takes longer. CI caches only
 | ExDNA | AST-based duplication detection |
 | Dialyxir / Dialyzer | Static analysis with an initially empty ignore list |
 | Sobelow | Security analysis that fails verification on findings |
+| RenameProject | One-command application, module, path, Docker, and workflow renaming |
 | Tidewave + Bandit | Development-only MCP access on the loopback interface |
 | `AGENTS.md` / `RULES.md` | Portable instructions and verification expectations |
 | GitHub Actions | Full verification and gated release packaging |
@@ -52,6 +53,7 @@ what was carried over, adapted, or deliberately left application-specific.
 | Command | Behavior |
 | --- | --- |
 | `mix setup` | Fetch dependencies |
+| `mix rename.project MyApp` | Rename the starter before development begins |
 | `mix test` | Run ExUnit |
 | `mix format` | Rewrite formatting and Styler suggestions |
 | `mix quality` | Format, then check duplication, lint, Dialyzer, and security |
@@ -75,15 +77,24 @@ error paths, and unnecessary abstractions as well as tool output.
 ## Rename the application
 
 GitHub names the repository, but does not rename the Elixir application inside it.
-For an application named `my_app`:
+Run the rename immediately after creating and cloning your repository, while the
+initial template commit is still easy to recover:
 
-1. Replace `elixir_ai_starter` with `my_app` and `ElixirAiStarter` with `MyApp` in
-   tracked text files, including Mix, Docker, tests, IEx, and these docs.
-2. Rename `lib/elixir_ai_starter/` to `lib/my_app/`,
-   `lib/elixir_ai_starter.ex` to `lib/my_app.ex`, and
-   `test/elixir_ai_starter_test.exs` to `test/my_app_test.exs`.
-3. Run `mix format`, `mix verify`, and `MIX_ENV=prod mix release.build`.
-4. Update this README with the actual domain, setup, and deployment instructions.
+```sh
+mix setup
+mix rename.project MyApp
+mix format
+mix verify
+MIX_ENV=prod mix release.build
+```
+
+`MyApp` must be an Elixir module name. The wrapper calls
+[`rename_project`](https://hex.pm/packages/rename_project) with the starter's
+module name and includes its Dockerfile, shell scripts, and GitHub workflow files.
+The task changes files and paths in place; commit or stash later work before using
+it. Inspect the resulting diff, then update this README with the real product,
+setup, and deployment instructions. Rename the GitHub repository separately if
+its name should also change.
 
 For a library, remove the application callback and empty supervisor if they are
 unneeded. The quality tooling works independently of the supervision tree.

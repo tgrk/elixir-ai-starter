@@ -5,7 +5,11 @@ folder using the Phoenix generator you have selected. Keep its generated
 application, endpoint, assets, and database setup. Transfer this template's
 quality tooling into it; do not overwrite a Phoenix `mix.exs` with the OTP one.
 
-1. Merge the nine quality dependencies and the `quality`, `quality.check`, and
+If you created the repository from this template, run `mix rename.project MyApp`
+before adding Phoenix or application code. The renamer intentionally ignores an
+`assets/` directory, so the cleanest point to rename is immediately after cloning.
+
+1. Merge the quality dependencies and the `quality`, `quality.check`, and
    `verify` aliases from this template. Preserve Phoenix's existing `setup`,
    asset, test/database, compiler, and listener configuration.
 2. Copy `.credo.exs` and the empty `.dialyzer_ignore.exs`. Merge the Dialyzer

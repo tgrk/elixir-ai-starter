@@ -12,6 +12,7 @@ of its engineering setup, not a fork of its fitness application.
 | `.dialyzer_ignore.exs` | Empty; Fittr-specific suppressions do not apply |
 | `.tool-versions` | Same Elixir/OTP pins, shared with CI |
 | Tidewave dependency / endpoint plug | Same dependency constraint; standalone dev Bandit endpoint |
+| Manual project renaming | Added `rename_project` with a wrapper that covers Docker and workflows |
 | `.iex.exs` | Bounded pretty printing; no domain aliases |
 | `AGENTS.md` / `RULES.md` | Portable project map and concrete rules without stale storage assumptions |
 | Feature documentation | Replaced with starter adoption and delivery guides |

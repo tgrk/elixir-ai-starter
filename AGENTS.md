@@ -15,6 +15,7 @@ and all callers of the boundary you intend to change; documentation can drift.
 ## Commands
 
 - `mix setup`: fetch dependencies.
+- `mix rename.project MyApp`: rename the starter before adding application code.
 - `iex -S mix`: explore the application locally.
 - `mix tidewave`: expose development runtime tools on localhost:4000.
 - `mix test path/to_test.exs`: focused feedback while iterating.

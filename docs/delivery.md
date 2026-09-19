@@ -3,7 +3,8 @@
 ## Verification
 
 CI runs on pull requests and pushes to `main`. It reads `.tool-versions`, fetches
-locked dependencies, executes `mix verify`, and compiles the development integrations. Development formatting is a
+locked dependencies, executes `mix verify`, compiles the development integrations,
+and checks that the starter can be renamed cleanly. Development formatting is a
 separate mutation; CI rejects unformatted code instead of rewriting it.
 
 The dependency/build cache includes OS, architecture, runtime versions, and lock

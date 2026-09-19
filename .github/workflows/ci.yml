@@ -40,3 +40,5 @@ jobs:
         run: MIX_ENV=dev mix compile --warnings-as-errors
       - name: Check the development MCP endpoint
         run: bash scripts/check-tidewave.sh
+      - name: Check project renaming
+        run: bash scripts/check-rename.sh
