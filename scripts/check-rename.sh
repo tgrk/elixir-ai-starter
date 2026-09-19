@@ -22,8 +22,17 @@ tar \
   test -f test/example_app_test.exs
   ! rg -n 'ElixirAiStarter|elixir_ai_starter|elixir-ai-starter' .
 
-  MIX_ENV=test MIX_DEPS_PATH="$source_dir/deps" MIX_BUILD_PATH="$check_dir/_build" \
-    mix verify
+  MIX_ENV=test MIX_DEPS_PATH="$source_dir/deps" MIX_BUILD_PATH="$check_dir/_build/test" \
+    mix compile --warnings-as-errors
+  MIX_ENV=test MIX_DEPS_PATH="$source_dir/deps" MIX_BUILD_PATH="$check_dir/_build/test" \
+    mix format --check-formatted
+  MIX_ENV=test MIX_DEPS_PATH="$source_dir/deps" MIX_BUILD_PATH="$check_dir/_build/test" \
+    mix test
+
+  MIX_ENV=prod MIX_DEPS_PATH="$source_dir/deps" MIX_BUILD_PATH="$check_dir/_build/prod" \
+    mix release.build
+  _build/prod/rel/example_app/bin/example_app eval \
+    '{:ok, _} = Application.ensure_all_started(:example_app); true = is_pid(Process.whereis(ExampleApp.Supervisor))'
 )
 
 echo "Project rename check passed"
