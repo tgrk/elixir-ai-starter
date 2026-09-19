@@ -21,7 +21,8 @@ tar \
   test -f lib/example_app.ex
   test -f lib/example_app/application.ex
   test -f test/example_app_test.exs
-  if rg --hidden -n 'ElixirAiStarter|elixir_ai_starter|elixir-ai-starter' .; then
+  if grep -rEIn --exclude-dir=_build --exclude-dir=deps \
+    'ElixirAiStarter|elixir_ai_starter|elixir-ai-starter' .; then
     exit 1
   else
     status=$?
