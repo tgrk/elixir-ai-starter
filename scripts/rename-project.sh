@@ -6,7 +6,7 @@ if [[ $# -ne 1 || ! $1 =~ ^[A-Z][A-Za-z0-9]*$ ]]; then
   exit 64
 fi
 
-mix rename ElixirAiStarter "$1" \
+MIX_ENV=dev mix rename ElixirAiStarter "$1" \
   --include-extensions .yml \
   --include-extensions .yaml \
   --include-extensions .sh \
