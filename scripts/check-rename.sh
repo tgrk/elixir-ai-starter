@@ -8,6 +8,7 @@ trap 'rm -rf "$check_dir"' EXIT
 
 tar \
   --exclude .git \
+  --exclude .elixir_ls \
   --exclude _build \
   --exclude deps \
   --exclude priv/plts \
@@ -20,7 +21,12 @@ tar \
   test -f lib/example_app.ex
   test -f lib/example_app/application.ex
   test -f test/example_app_test.exs
-  ! rg -n 'ElixirAiStarter|elixir_ai_starter|elixir-ai-starter' .
+  if rg --hidden -n 'ElixirAiStarter|elixir_ai_starter|elixir-ai-starter' .; then
+    exit 1
+  else
+    status=$?
+    test "$status" -eq 1
+  fi
 
   MIX_ENV=test MIX_DEPS_PATH="$source_dir/deps" MIX_BUILD_PATH="$check_dir/_build/test" \
     mix compile --warnings-as-errors
