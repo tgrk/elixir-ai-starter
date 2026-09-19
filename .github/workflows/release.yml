@@ -1,0 +1,35 @@
+name: Release
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    uses: ./.github/workflows/ci.yml
+  package:
+    needs: verify
+    runs-on: ubuntu-24.04
+    env:
+      MIX_ENV: prod
+    steps:
+      - uses: actions/checkout@v4
+      - uses: erlef/setup-beam@v1
+        with:
+          version-file: .tool-versions
+          version-type: strict
+      - run: mix deps.get --only prod --check-locked
+      - run: mix compile --warnings-as-errors
+      - run: mix release.build
+      - name: Smoke-test the release
+        run: >-
+          _build/prod/rel/elixir_ai_starter/bin/elixir_ai_starter eval
+          '{:ok, _} = Application.ensure_all_started(:elixir_ai_starter);
+          true = is_pid(Process.whereis(ElixirAiStarter.Supervisor));
+          [] = Enum.filter([Tidewave, Bandit, Credo, Sobelow], &Code.ensure_loaded?/1)'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-linux-amd64
+          path: _build/prod/*.tar.gz
+          if-no-files-found: error

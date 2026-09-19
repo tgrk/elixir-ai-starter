@@ -1,0 +1,11 @@
+_build
+deps
+.git
+.github
+cover
+priv/plts
+tmp
+.env
+.env.*
+**/*.secret.exs
+erl_crash.dump
