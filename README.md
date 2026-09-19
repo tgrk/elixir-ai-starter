@@ -4,6 +4,11 @@ A plain Elixir/OTP GitHub template with the quality and AI development workflow
 extracted from Fittr. No database, web framework, external service, or API key is
 required. Development tools stay out of the production release.
 
+Companion post: [An Elixir project setup for the age of AI](https://www.wiso.cz/post/elixir-project-tooling-for-ai-development/)
+explains the choices behind the quality tools, AI workflow, CI, and this template.
+The post is currently a draft; the link is its planned publication URL and will
+be available once the article is published.
+
 ## Start here
 
 Use GitHub's **Use this template** button to create your own repository, then clone
