@@ -39,7 +39,7 @@ defmodule ElixirAiStarter.MixProject do
       {:ex_slop, "~> 0.4.0", only: [:dev, :test], runtime: false},
       {:credo_results, "~> 0.1.0", only: [:dev, :test], runtime: false},
       {:credo_unnecessary_reduce, "~> 0.4.0", only: [:dev, :test], runtime: false},
-      {:forge_credo_checks, "~> 0.4", only: [:dev, :test], runtime: false},
+      {:forge_credo_checks, "~> 0.10", only: [:dev, :test], runtime: false},
       {:ex_dna, "~> 1.5", only: [:dev, :test], runtime: false},
       {:rename_project, "~> 0.1.0", only: :dev, runtime: false},
       {:tidewave, "~> 0.1", only: :dev},

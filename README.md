@@ -37,7 +37,7 @@ The first verification builds Dialyzer's PLT and takes longer. CI caches only
 | ExSlop | Recommended checks for redundant or misleading generated code |
 | CredoResults | Consistent result shapes |
 | CredoUnnecessaryReduce | Standard library operations instead of unnecessary reductions |
-| ForgeCredoChecks | Fittr's selected collection and control-flow checks |
+| ForgeCredoChecks | Collection, control-flow, supervision, module layout, and behavior-test checks |
 | ExDNA | AST-based duplication detection |
 | Dialyxir / Dialyzer | Static analysis with an initially empty ignore list |
 | Sobelow | Security analysis that fails verification on findings |
@@ -52,6 +52,12 @@ Fittr's selected Credo checks are preserved, including its disabled checks. The
 Mnesia-specific `:atomic` result tag is removed. Add it back only if your code
 actually uses that contract. Read [the extraction notes](docs/from-fittr.md) for
 what was carried over, adapted, or deliberately left application-specific.
+
+Additional Forge checks flag `Map.get/2` defaults using `||`, unsupervised
+processes, source inspection in tests, and multiple modules per source file.
+The timing/private-state check runs only under `test/` (including umbrella apps),
+where sleeps and direct process-state access make tests brittle. When fixing a
+map default, preserve the distinction between an absent key, `nil`, and `false`.
 
 ## Commands
 
