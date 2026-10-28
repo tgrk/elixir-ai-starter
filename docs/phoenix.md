@@ -11,7 +11,8 @@ before adding Phoenix or application code. The renamer intentionally ignores an
 
 1. Merge the quality dependencies and the `quality`, `quality.check`, and
    `verify` aliases from this template. Preserve Phoenix's existing `setup`,
-   asset, test/database, compiler, and listener configuration.
+   asset, test/database, compiler, and listener configuration. Remove `--no-router`
+   from the Sobelow command so it checks the Phoenix router.
 2. Copy `.credo.exs` and the empty `.dialyzer_ignore.exs`. Merge the Dialyzer
    settings and preferred CLI environments into the generated Mix project.
 3. Add `Styler` to the generated formatter's plugins; retain its HEEx plugin,

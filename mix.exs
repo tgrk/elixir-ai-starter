@@ -58,7 +58,7 @@ defmodule ElixirAiStarter.MixProject do
         "ex_dna",
         "credo --strict",
         "dialyzer",
-        "sobelow --exit low"
+        "sobelow --exit low --no-router"
       ],
       verify: ["compile --warnings-as-errors", "test", "quality.check"],
       "release.build": ["release"],
