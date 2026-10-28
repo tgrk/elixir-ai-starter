@@ -84,8 +84,10 @@ exceptions. Review findings against the actual behavior before changing a test.
 preferred CLI environments. Don't override them with `MIX_ENV=prod`: quality
 dependencies are intentionally absent there. Use `mix format` before `mix verify`.
 
-Sobelow reports a missing-router warning for this non-Phoenix application; its
-source scan still runs. The locked CredoResults dependency also emits compiler
+Sobelow uses `--no-router` for this non-Phoenix application; its source scan still
+runs. Keep atom keys in `mix.lock` unquoted to avoid warnings during Sobelow's
+dependency scan; Mix may restore the quotes when updating dependencies.
+The locked CredoResults dependency also emits compiler
 warnings on Elixir 1.20; these are upstream warnings, not suppressed project
 warnings.
 
