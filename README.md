@@ -38,6 +38,7 @@ The first verification builds Dialyzer's PLT and takes longer. CI caches only
 | CredoResults | Consistent result shapes |
 | CredoUnnecessaryReduce | Standard library operations instead of unnecessary reductions |
 | ForgeCredoChecks | Collection, control-flow, supervision, module layout, and behavior-test checks |
+| Jump.CredoChecks | Vacuous tests, missing or ambiguous assertions, and global Logger changes in async tests |
 | ExDNA | AST-based duplication detection |
 | Dialyxir / Dialyzer | Static analysis with an initially empty ignore list |
 | Sobelow | Security analysis that fails verification on findings |
@@ -58,6 +59,12 @@ processes, source inspection in tests, and multiple modules per source file.
 The timing/private-state check runs only under `test/` (including umbrella apps),
 where sleeps and direct process-state access make tests brittle. When fixing a
 map default, preserve the distinction between an absent key, `nil`, and `false`.
+
+Selected Jump checks require tests to exercise application behavior and contain
+assertions, flag `assert a or b`, and reject `Logger.configure/1` in async test
+modules. The vacuous-test check cannot follow indirect calls such as script
+evaluation or observe OTP startup; the two starter boundary tests document narrow
+exceptions. Review findings against the actual behavior before changing a test.
 
 ## Commands
 
