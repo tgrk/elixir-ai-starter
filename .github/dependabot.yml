@@ -12,6 +12,9 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    ignore:
+      # A bump would run the new commit with the auto-merge workflow's write token.
+      - dependency-name: dependabot/fetch-metadata
     groups:
       actions:
         patterns: ['*']
