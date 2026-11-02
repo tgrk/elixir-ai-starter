@@ -23,6 +23,11 @@ auto-merge, then set repository variable `DEPENDABOT_AUTO_MERGE=true`. The workf
 uses Dependabot metadata and never checks out or executes pull-request code with
 its write token. Leave the variable unset if required checks cannot be enforced.
 
+`dependabot/fetch-metadata` runs with that write token, so it is pinned to a commit
+and excluded from Dependabot updates. A pull request runs the workflow from its own
+merge commit, so a Dependabot bump would execute the new action before review. Check
+for new releases yourself, review the commit, and update the pin by hand.
+
 ## Releases
 
 ```sh
