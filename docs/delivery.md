@@ -11,9 +11,10 @@ The dependency/build cache includes OS, architecture, runtime versions, and lock
 hash. The Dialyzer cache is limited to `priv/plts`, with a runtime-specific fallback
 so the tool can update an older PLT. Cache misses must remain safe.
 
-Configure the `Verify` status as a required check in your repository rules before
-relying on auto-merge. Template files cannot impose repository settings on projects
-created from the template. Private repository rules may depend on your GitHub plan.
+Before enabling auto-merge, create an active repository rule targeting your default
+branch and require the `Verify` check from GitHub Actions. A disabled ruleset does
+not enforce CI. Template files cannot impose these settings on projects created
+from the template. Private repository rules may depend on your GitHub plan.
 
 Dependabot opens weekly Mix and Actions updates. Minor/patch Mix updates are
 grouped; major updates are separate. Automatic merging is off by default. To opt
@@ -21,6 +22,11 @@ in, first require the CI check and configure your review policy, enable reposito
 auto-merge, then set repository variable `DEPENDABOT_AUTO_MERGE=true`. The workflow
 uses Dependabot metadata and never checks out or executes pull-request code with
 its write token. Leave the variable unset if required checks cannot be enforced.
+
+`dependabot/fetch-metadata` runs with that write token, so it is pinned to a commit
+and excluded from Dependabot updates. A pull request runs the workflow from its own
+merge commit, so a Dependabot bump would execute the new action before review. Check
+for new releases yourself, review the commit, and update the pin by hand.
 
 ## Releases
 
